@@ -5,10 +5,13 @@
 <form action="" method="post" name="search">
     {{ form.hidden_tag() }}
     <p>
-        {{ form.url_to_search(size=20) }}
+        <label>Url to crawl: </label>{{ form.url_to_search(size=100) }}
         {% for error in form.url_to_search.errors %}
         <span style="color: red;">[{{error}}]</span>
-        {% endfor %}<br>
+        {% endfor %}<br><br>
+        <label>Game Name (Game 1 by default): </label> {{ form.game_name(size=20) }}<br><br>
+        <label>Team Scores (0 to 1 in favor of the winner by default):</label>{{ form.blue_score(size=1) }} to {{form.purple_score(size=1) }}<br><br>
+        <label></label>
     </p>
 
     <p><input type="submit" value="Hit em' with the flex"></p>

@@ -20,6 +20,7 @@ class ScoreBoard():
         self.match_url = str()
         self.date_played = str()
         self.duration = str()
+        self.game_name = str()
 
     def load(self, driver):
         scoreboard = ui.WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".scoreboard")))
@@ -40,10 +41,7 @@ class ScoreBoard():
         self.remove_short_names_from_player_names()
 
     def extract_team_score_and_conclusion(self, scoreboard_element):
-        total_team_kills = scoreboard_element.find_elements_by_class_name("kills")
         team_conclusions = scoreboard_element.find_elements_by_class_name("game-conclusion")
-        self.blue_team.score = total_team_kills[0].text
-        self.red_team.score = total_team_kills[2].text
         self.blue_team.conclusion = team_conclusions[0].text
         self.red_team.conclusion = team_conclusions[1].text
 
@@ -116,8 +114,8 @@ class Team():
         self.short_name = str()
         self.players = []
         self.bans = []
-        self.score = str()
         self.conclusion = str()
+        self.score = str()
 
 class Player():
     def __init__(self, player_name, champion_name, level, kills, deaths, assists, cs, gold, items, summoner_spells):
@@ -182,11 +180,27 @@ class Item():
         return item_name
 
 
-def spider(url):
+def spider(url, game_name, blue_score, purple_score):
     driver = webdriver.Firefox()
     driver.get(url)
     current_match = ScoreBoard()
     current_match.match_url = url
+    if game_name:
+        current_match.game_name = game_name
+    else:
+        current_match.game_name = "Game 1"
+    if blue_score and purple_score:
+        current_match.blue_team.score = blue_score
+        current_match.red_team.score = purple_score
+    else:
+        if current_match.blue_team.conclusion == "VICTORY":
+            current_match.blue_team.score = "1"
+            current_match.red_team.score = "0"
+        else:
+            current_match.blue_team.score = "0"
+            current_match.red_team.score = "1"
+
+
     current_match.load(driver)
     template = convert_to_template.convert_scoreboard_to_template(current_match)
     driver.quit()

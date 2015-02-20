@@ -7,3 +7,6 @@ from wtforms.validators import DataRequired
 
 class SearchForm(Form):
     url_to_search = StringField('url_to_search', validators=[DataRequired()])
+    game_name = StringField('game_name')
+    blue_score = StringField('blue_score')
+    purple_score = StringField('purple_score')

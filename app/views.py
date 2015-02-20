@@ -14,7 +14,10 @@ def index():
     if form.validate_on_submit():
         flash("Parse requested for %s" % form.url_to_search)
         url_search = form.url_to_search._value()
-        template = parser.spider(url_search)
+        game_name = form.game_name._value()
+        blue_score = form.blue_score._value()
+        purple_score = form.purple_score._value()
+        template = parser.spider(url_search, game_name, blue_score, purple_score)
         return render_template("results.html",
                            title='Results',
                            template = template,
