@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block content %}
+<h1>Parse a match scoreboard</h1>
+<form action="" method="post" name="search">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.url_to_search(size=20) }}
+        {% for error in form.url_to_search.errors %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+
+    <p><input type="submit" value="Hit em' with the flex"></p>
+</form>
+{% endblock %}

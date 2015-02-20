@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% if title %}
+    <title>{{ title }} - Scoreboard Parser</title>
+    {% else %}
+    <title>Scoreboard Parser</title>
+    {% endif %}
+</head>
+<body>
+<div>Scoreboard Parser: <a href="/index">Home</a></div>
+<hr>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% block content %}{% endblock %}
+</body>
+</html>
