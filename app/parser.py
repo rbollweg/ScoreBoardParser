@@ -1,6 +1,5 @@
 __author__ = 'The Gibs'
 from selenium import webdriver
-from pyvirtualdisplay import Display
 from selenium.webdriver.support import expected_conditions as EC
 import selenium.webdriver.support.ui as ui
 from selenium.webdriver.common.by import By
@@ -65,7 +64,7 @@ class ScoreBoard():
             self.blue_team.bans.append(ban_champ_name)
 
     def extract_player_info(self, player_element):
-        player_name = player_element.find_element_by_tag_name("a").text
+        player_name = player_element.find_element_by_class_name("champion-nameplate-name").text
         level = player_element.find_element_by_class_name("champion-nameplate-level").text
         champ_img = player_element.find_element_by_tag_name("img").get_attribute("src")
         champ_name_results = re.search("champion/(.*).png", champ_img)
@@ -100,8 +99,8 @@ class ScoreBoard():
 
 
     def get_short_names(self):
-        self.blue_team.short_name = re.search("(.*)\s(.*)",self.blue_team.players[0].player_name).group(1)
-        self.red_team.short_name = re.search("(.*)\s(.*)",self.red_team.players[0].player_name).group(1)
+        self.blue_team.short_name = re.search("(.*)\s",self.blue_team.players[0].player_name).group(1)
+        self.red_team.short_name = re.search("(.*)\s",self.red_team.players[0].player_name).group(1)
 
     def remove_short_names_from_player_names(self):
         for player in self.blue_team.players:
