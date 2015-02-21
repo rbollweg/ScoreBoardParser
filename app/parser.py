@@ -184,7 +184,7 @@ class Item():
 
 def spider(url, game_name, blue_score, purple_score):
     try:
-        driver = webdriver.Firefox()
+        driver = webdriver.PhantomJS(executable_path='app\phantomjs.exe')
         driver.get(url)
         driver.refresh() #bullshit workaround
         current_match = ScoreBoard()
