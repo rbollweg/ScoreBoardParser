@@ -3,9 +3,12 @@ __author__ = 'The Gibs'
 from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
+from tornado import web
 from app import app
 from app import parser
 
+
+handlers = [(r'/favicon.ico', web.StaticFileHandler, {'path': 'app/static/favicon.ico'})]
 
 def main():
     parser.load_item_numbers()
