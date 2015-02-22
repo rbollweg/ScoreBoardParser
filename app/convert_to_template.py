@@ -8,9 +8,11 @@ def convert_scoreboard_to_template(scoreboard):
     teams = "|team1=" + scoreboard.blue_team.short_name + "|team2=" + scoreboard.red_team.short_name
     scores = "|team1score=" + scoreboard.blue_team.score + "|team2score=" + scoreboard.red_team.score
     winner = "|winner="
-    if scoreboard.blue_team.conclusion == "VICTORY":
+    test2 = scoreboard.blue_team.conclusion
+    test  = scoreboard.red_team.conclusion
+    if scoreboard.blue_team.conclusion == "  VICTORY  ":
         winner += "1"
-    elif scoreboard.red_team.conclusion == "VICTORY":
+    elif scoreboard.red_team.conclusion == "  VICTORY  ":
         winner += "2"
     team1bans = str()
     for i in range(0, scoreboard.blue_team.bans.__len__()):

@@ -4,7 +4,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import selenium.webdriver.support.ui as ui
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
-from ghost import Ghost
 from bs4 import BeautifulSoup
 from app import convert_to_template
 
@@ -27,7 +26,10 @@ class ScoreBoard():
             EC.presence_of_element_located((By.CSS_SELECTOR, ".scoreboard")))
         page_source = driver.page_source
         soup = BeautifulSoup(page_source)
-        driver.quit()
+        try:
+            driver.quit()
+        except:
+            pass
         self.extract_bans(soup)
         self.extract_conclusion(soup)
         self.duration = soup.find('span', class_='map-header-duration').text
@@ -58,7 +60,7 @@ class ScoreBoard():
 
     def extract_conclusion(self, soup):
         soupy_conclusions = soup.find_all('div', class_='game-conclusion')
-        self.blue_team.conclusion = soupy_conclusions[0].string
+        self.blue_team.conclusion = soupy_conclusions[0].text
         self.red_team.conclusion = soupy_conclusions[1].text
 
 
