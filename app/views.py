@@ -1,6 +1,5 @@
 __author__ = 'The Gibs'
 
-
 from flask import render_template, flash, redirect
 from app import app, parser
 from .forms import SearchForm
@@ -24,20 +23,19 @@ def index():
         lol_vod = form.lol_vod._value()
         youtube_vod = form.youtube_vod._value()
         picks_and_bans_page = form.picks_and_bans_page._value()
-        template = parser.spider(url_search, game_name, tournament_name, blue_score, purple_score, daylight_savings, start_time, time_zone, lol_vod, youtube_vod, picks_and_bans_page)
+        template = parser.spider(url_search, game_name, tournament_name, blue_score, purple_score, daylight_savings,
+                                 start_time, time_zone, lol_vod, youtube_vod, picks_and_bans_page)
         return render_template("results.html",
-                           title='Results',
-                           template = template,
-                           form = form)
+                               title='Results',
+                               template=template,
+                               form=form)
     return render_template("index.html",
-                        title='Home',
-                        form = form)
-
+                           title='Home',
+                           form=form)
 
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-
     return render_template('results.html',
                            title='Searching',
                            form=form)

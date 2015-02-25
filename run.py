@@ -10,11 +10,13 @@ from app import parser
 
 handlers = [(r'/favicon.ico', web.StaticFileHandler, {'path': 'app/static/favicon.ico'})]
 
+
 def main():
     parser.load_item_numbers()
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(5000)
     IOLoop.instance().start()
+
 
 if __name__ == "__main__":
     main()

@@ -13,7 +13,8 @@ import csv
 
 
 class ScoreBoard():
-    def __init__(self, match_url, game_name, tournament_name, daylight_savings, start_time, time_zone, lol_vod, youtube_vod, picks_and_bans_page):
+    def __init__(self, match_url, game_name, tournament_name, daylight_savings, start_time, time_zone, lol_vod,
+                 youtube_vod, picks_and_bans_page):
         self.red_team = Team()
         self.blue_team = Team()
         self.tournament_name = tournament_name
@@ -23,14 +24,12 @@ class ScoreBoard():
         self.date_played = datetime
         self.duration = str()
         self.game_name = game_name
-        self.daylight_savings= daylight_savings
+        self.daylight_savings = daylight_savings
         self.start_time = start_time
         self.time_zone = time_zone
         self.lol_vod = lol_vod
         self.youtube_vod = youtube_vod
         self.picks_and_bans_page = picks_and_bans_page
-
-
 
 
     def load(self, driver):
@@ -118,10 +117,9 @@ class ScoreBoard():
 
     def remove_short_names_from_player_names(self):
         for player in self.blue_team.players:
-            test = re.search(".*\s(.*)", player.player_name)
-            player.player_name = re.search(".*\s(.*)", player.player_name).group(1)
+            player.player_name = re.search("(.*)\s(.*)", player.player_name).group(2)
         for player in self.red_team.players:
-            player.player_name = re.search(".*\s(.*)", player.player_name).group(1)
+            player.player_name = re.search(".*\s(.*)", player.player_name).group(2)
 
 
 class Team():
@@ -197,14 +195,16 @@ class Item():
         return item_name
 
 
-def spider(url, game_name, tournament_name, blue_score, purple_score, daylight_savings, start_time, time_zone, lol_vod, youtube_vod, picks_and_bans_page):
+def spider(url, game_name, tournament_name, blue_score, purple_score, daylight_savings, start_time, time_zone, lol_vod,
+           youtube_vod, picks_and_bans_page):
     try:
-        driver = webdriver.Firefox()#driver = webdriver.PhantomJS(executable_path='app\phantomjs.exe')
+        driver = webdriver.Firefox()  # driver = webdriver.PhantomJS(executable_path='app\phantomjs.exe')
         driver.get(url)
-        driver.refresh() #bullshit workaround
+        driver.refresh()  # bullshit workaround
         if not game_name:
             game_name = "Game 1"
-        current_match = ScoreBoard(url, game_name, tournament_name, daylight_savings, start_time, time_zone, lol_vod, youtube_vod, picks_and_bans_page)
+        current_match = ScoreBoard(url, game_name, tournament_name, daylight_savings, start_time, time_zone, lol_vod,
+                                   youtube_vod, picks_and_bans_page)
         current_match.load(driver)
         if blue_score and purple_score:
             current_match.blue_team.score = blue_score
@@ -217,10 +217,10 @@ def spider(url, game_name, tournament_name, blue_score, purple_score, daylight_s
                 current_match.blue_team.score = "0"
                 current_match.red_team.score = "1"
 
-
         template = convert_to_template.convert_scoreboard_to_template(current_match)
         return template
     except:
+        driver.quit()
         return "Error Parsing URL, make sure all fields are filled correctly"
 
 
