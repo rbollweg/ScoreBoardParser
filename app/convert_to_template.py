@@ -9,9 +9,9 @@ def convert_scoreboard_to_template(scoreboard):
     scores = "|team1score=" + scoreboard.blue_team.score + "|team2score=" + scoreboard.red_team.score
     winner = "|winner="
     tournament_name = "|tournament=" + scoreboard.tournament_name
-    lol_vod = "|lolvod=" + scoreboard.lol_vod + "\n"
-    youtube_vod = "|youtubevod=" + scoreboard.youtube_vod + "\n"
-    picks_and_bans_page = "|picksandbanspage=" + scoreboard.picks_and_bans_page + "\n"
+    lol_vod = "|lolvod=" + scoreboard.lol_vod
+    youtube_vod = "|youtubevod=" + scoreboard.youtube_vod
+    picks_and_bans_page = "|picksandbanspage=" + scoreboard.picks_and_bans_page
     if scoreboard.blue_team.conclusion == "  VICTORY  ":
         winner += "1"
     elif scoreboard.red_team.conclusion == "  VICTORY  ":
@@ -22,7 +22,7 @@ def convert_scoreboard_to_template(scoreboard):
     team2bans = str()
     for i in range(0, scoreboard.red_team.bans.__len__()):
         team2bans += "|team2ban" + str(i+1) + "=" + scoreboard.red_team.bans[i]
-    date = "|date=" + scoreboard.date_played + "\n" + "|dst=" + scoreboard.daylight_savings + "|" + scoreboard.time_zone + "=" + scoreboard.start_time
+    date = "|date=" + scoreboard.date_played.strftime('%Y-%m-%d') + "\n" + "|dst=" + scoreboard.daylight_savings + "|" + scoreboard.time_zone + "=" + scoreboard.start_time
 
     duration = "|gamelength=" + scoreboard.duration
 

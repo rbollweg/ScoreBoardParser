@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
 from bs4 import BeautifulSoup
 from app import convert_to_template
-
+from datetime import datetime
 import sys
 import re
 import csv
@@ -20,7 +20,7 @@ class ScoreBoard():
         self.blue_team.score = str()
         self.red_team.score = str()
         self.match_url = match_url
-        self.date_played = str()
+        self.date_played = datetime
         self.duration = str()
         self.game_name = game_name
         self.daylight_savings= daylight_savings
@@ -45,7 +45,7 @@ class ScoreBoard():
         self.extract_bans(soup)
         self.extract_conclusion(soup)
         self.duration = soup.find('span', class_='map-header-duration').text
-        self.date_played = soup.find('span', class_='map-header-date').text
+        self.date_played = datetime.strptime(soup.find('span', class_='map-header-date').text, '%m/%d/%Y')
         soupy_players = soup.find_all('div', class_='player')
         blue_team = soupy_players[0:5]
         red_team = soupy_players[5:10]
@@ -166,7 +166,7 @@ class SummonerSpell():
             self.summoner_spell = "Exhaust"
         elif unconverted_text == "SummonerRevive":
             self.summoner_spell = "Revive"
-        elif unconverted_text == "SummonerGhost":
+        elif unconverted_text == "SummonerHaste":
             self.summoner_spell = "Ghost"
         elif unconverted_text == "SummonerCleanse":
             self.summoner_spell = "Cleanse"
