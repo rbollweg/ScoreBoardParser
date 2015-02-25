@@ -118,6 +118,7 @@ class ScoreBoard():
 
     def remove_short_names_from_player_names(self):
         for player in self.blue_team.players:
+            test = re.search(".*\s(.*)", player.player_name)
             player.player_name = re.search(".*\s(.*)", player.player_name).group(1)
         for player in self.red_team.players:
             player.player_name = re.search(".*\s(.*)", player.player_name).group(1)
@@ -197,7 +198,7 @@ class Item():
 
 
 def spider(url, game_name, tournament_name, blue_score, purple_score, daylight_savings, start_time, time_zone, lol_vod, youtube_vod, picks_and_bans_page):
-    #try:
+    try:
         driver = webdriver.Firefox()#driver = webdriver.PhantomJS(executable_path='app\phantomjs.exe')
         driver.get(url)
         driver.refresh() #bullshit workaround
@@ -219,7 +220,7 @@ def spider(url, game_name, tournament_name, blue_score, purple_score, daylight_s
 
         template = convert_to_template.convert_scoreboard_to_template(current_match)
         return template
-    #except:
+    except:
         return "Error Parsing URL, make sure all fields are filled correctly"
 
 
