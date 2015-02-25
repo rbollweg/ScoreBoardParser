@@ -15,9 +15,16 @@ def index():
         flash("Parse requested for %s" % form.url_to_search)
         url_search = form.url_to_search._value()
         game_name = form.game_name._value()
+        tournament_name = form.tournament_name._value()
         blue_score = form.blue_score._value()
         purple_score = form.purple_score._value()
-        template = parser.spider(url_search, game_name, blue_score, purple_score)
+        daylight_savings = form.daylight_savings_time.data
+        start_time = form.start_time._value()
+        time_zone = form.time_zone.data
+        lol_vod = form.lol_vod._value()
+        youtube_vod = form.youtube_vod._value()
+        picks_and_bans_page = form.picks_and_bans_page._value()
+        template = parser.spider(url_search, game_name, tournament_name, blue_score, purple_score, daylight_savings, start_time, time_zone, lol_vod, youtube_vod, picks_and_bans_page)
         return render_template("results.html",
                            title='Results',
                            template = template,

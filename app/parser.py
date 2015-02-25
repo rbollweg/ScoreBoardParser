@@ -13,13 +13,25 @@ import csv
 
 
 class ScoreBoard():
-    def __init__(self):
+    def __init__(self, match_url, game_name, tournament_name, daylight_savings, start_time, time_zone, lol_vod, youtube_vod, picks_and_bans_page):
         self.red_team = Team()
         self.blue_team = Team()
-        self.match_url = str()
+        self.tournament_name = tournament_name
+        self.blue_team.score = str()
+        self.red_team.score = str()
+        self.match_url = match_url
         self.date_played = str()
         self.duration = str()
-        self.game_name = str()
+        self.game_name = game_name
+        self.daylight_savings= daylight_savings
+        self.start_time = start_time
+        self.time_zone = time_zone
+        self.lol_vod = lol_vod
+        self.youtube_vod = youtube_vod
+        self.picks_and_bans_page = picks_and_bans_page
+
+
+
 
     def load(self, driver):
         ui.WebDriverWait(driver, 15).until(
@@ -184,17 +196,15 @@ class Item():
         return item_name
 
 
-def spider(url, game_name, blue_score, purple_score):
-    try:
+def spider(url, game_name, tournament_name, blue_score, purple_score, daylight_savings, start_time, time_zone, lol_vod, youtube_vod, picks_and_bans_page):
+    #try:
         driver = webdriver.Firefox()#driver = webdriver.PhantomJS(executable_path='app\phantomjs.exe')
         driver.get(url)
         driver.refresh() #bullshit workaround
-        current_match = ScoreBoard()
-        current_match.match_url = url
-        if game_name:
-            current_match.game_name = game_name
-        else:
-            current_match.game_name = "Game 1"
+        if not game_name:
+            game_name = "Game 1"
+        current_match = ScoreBoard(url, game_name, tournament_name, daylight_savings, start_time, time_zone, lol_vod, youtube_vod, picks_and_bans_page)
+        current_match.load(driver)
         if blue_score and purple_score:
             current_match.blue_team.score = blue_score
             current_match.red_team.score = purple_score
@@ -206,10 +216,10 @@ def spider(url, game_name, blue_score, purple_score):
                 current_match.blue_team.score = "0"
                 current_match.red_team.score = "1"
 
-        current_match.load(driver)
+
         template = convert_to_template.convert_scoreboard_to_template(current_match)
         return template
-    except:
+    #except:
         return "Error Parsing URL, make sure all fields are filled correctly"
 
 

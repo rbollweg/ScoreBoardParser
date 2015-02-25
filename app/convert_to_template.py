@@ -8,8 +8,10 @@ def convert_scoreboard_to_template(scoreboard):
     teams = "|team1=" + scoreboard.blue_team.short_name + "|team2=" + scoreboard.red_team.short_name
     scores = "|team1score=" + scoreboard.blue_team.score + "|team2score=" + scoreboard.red_team.score
     winner = "|winner="
-    test2 = scoreboard.blue_team.conclusion
-    test  = scoreboard.red_team.conclusion
+    tournament_name = "|tournament=" + scoreboard.tournament_name
+    lol_vod = "|lolvod=" + scoreboard.lol_vod + "\n"
+    youtube_vod = "|youtubevod=" + scoreboard.youtube_vod + "\n"
+    picks_and_bans_page = "|picksandbanspage=" + scoreboard.picks_and_bans_page + "\n"
     if scoreboard.blue_team.conclusion == "  VICTORY  ":
         winner += "1"
     elif scoreboard.red_team.conclusion == "  VICTORY  ":
@@ -20,7 +22,8 @@ def convert_scoreboard_to_template(scoreboard):
     team2bans = str()
     for i in range(0, scoreboard.red_team.bans.__len__()):
         team2bans += "|team2ban" + str(i+1) + "=" + scoreboard.red_team.bans[i]
-    date = "|date=" + scoreboard.date_played
+    date = "|date=" + scoreboard.date_played + "\n" + "|dst=" + scoreboard.daylight_savings + "|" + scoreboard.time_zone + "=" + scoreboard.start_time
+
     duration = "|gamelength=" + scoreboard.duration
 
     blue_players = str()
@@ -34,7 +37,7 @@ def convert_scoreboard_to_template(scoreboard):
 
     footer = "}}"
 
-    template += header + teams + scores + winner + '\n' + team1bans + '\n' + team2bans + '\n' + date + '\n' + duration + '\n' + blue_players + '\n' + red_players + footer
+    template += header + teams + scores + winner + tournament_name + '\n' + lol_vod + youtube_vod +picks_and_bans_page + '\n' + team1bans + '\n' + team2bans + '\n' + date + '\n' + duration + '\n' + blue_players + '\n' + red_players + footer
     return template
 
 def convert_player_info_to_template(team_color, player_number, player):
