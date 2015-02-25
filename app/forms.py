@@ -1,7 +1,7 @@
 __author__ = 'The Gibs'
 
 from flask.ext.wtf import Form
-from wtforms import StringField, BooleanField, SelectField
+from wtforms_components import TimeField, StringField, SelectField
 from wtforms.validators import DataRequired
 
 
@@ -11,7 +11,7 @@ class SearchForm(Form):
     tournament_name = StringField('tournament_name')
     blue_score = StringField('blue_score')
     purple_score = StringField('purple_score')
-    start_time = StringField('start_time', validators=[DataRequired()])
+    start_time = TimeField('start_time', validators=[DataRequired()])
     daylight_savings_time = SelectField('DST',
                                         choices=[("no", 'No'), ("yes", 'Yes'), ("spring", 'Spring'), ("fall", 'Fall')])
     time_zone = SelectField('DST', coerce=str, choices=[("PST", 'PST'), ("EST", 'EST'), ("CST", 'CST'), ("KST", 'KST')])
