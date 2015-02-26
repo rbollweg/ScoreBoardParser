@@ -4,12 +4,14 @@ from flask import render_template, flash, redirect
 from app import app, parser
 from .forms import SearchForm
 import datetime
-
+import urllib.request
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     form = SearchForm()
+    readme_request = urllib.request.urlopen('http://pastebin.com/raw.php?i=y8vvW8Tq')
+    readme = readme_request.read().decode("utf-8")
     if form.validate_on_submit():
         flash("Parse requested for %s" % form.url_to_search)
         url_search = form.url_to_search._value()
@@ -28,10 +30,12 @@ def index():
         return render_template("results.html",
                                title='Results',
                                template=template,
-                               form=form)
+                               form=form,
+                               readme=readme)
     return render_template("index.html",
                            title='Home',
-                           form=form)
+                           form=form,
+                           readme=readme)
 
 
 @app.route('/search', methods=['GET', 'POST'])

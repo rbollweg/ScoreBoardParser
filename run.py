@@ -8,7 +8,6 @@ from app import app
 from app import parser
 
 
-handlers = [(r'/favicon.ico', web.StaticFileHandler, {'path': 'app/static/favicon.ico'})]
 
 
 def main():

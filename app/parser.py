@@ -117,9 +117,9 @@ class ScoreBoard():
 
     def remove_short_names_from_player_names(self):
         for player in self.blue_team.players:
-            player.player_name = re.search("(.*)\s(.*)", player.player_name).group(2)
+            player.player_name = re.search(".*\s(.*)", player.player_name).group(1)
         for player in self.red_team.players:
-            player.player_name = re.search(".*\s(.*)", player.player_name).group(2)
+            player.player_name = re.search(".*\s(.*)", player.player_name).group(1)
 
 
 class Team():
