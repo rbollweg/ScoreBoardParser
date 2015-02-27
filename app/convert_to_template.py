@@ -45,7 +45,7 @@ def convert_scoreboard_to_template(scoreboard):
 
 def convert_player_info_to_template(team_color, player_number, player):
     player_intro = "|" + team_color + str(
-        player_number + 1) + "={{MatchRecapS4/Player|champion=" + player.champion_name + "|name=" + player.player_name + '\n'
+        player_number + 1) + "={{MatchRecapS4/Player|champion=" + player.champion_name.champ_name + "|name=" + player.player_name + '\n'
     player_kda = "\t|kills=" + player.kills + "|deaths=" + player.deaths + "|assists=" + player.assists
     player_game_info = "|gold=" + player.gold + "|cs=" + player.cs + "|summonerspell1=" + player.summoner_spells[
         0].summoner_spell + "|summonerspell2=" + player.summoner_spells[1].summoner_spell + '\n'

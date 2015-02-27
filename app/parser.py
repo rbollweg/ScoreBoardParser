@@ -134,7 +134,7 @@ class Team():
 class Player():
     def __init__(self, player_name, champion_name, level, kills, deaths, assists, cs, gold, items, summoner_spells):
         self.player_name = player_name
-        self.champion_name = champion_name
+        self.champion_name = ChampionName(champion_name)
         self.level = level
         self.kills = kills
         self.deaths = deaths
@@ -144,6 +144,17 @@ class Player():
         self.items = items
         self.trinket = items.pop()
         self.summoner_spells = summoner_spells
+
+
+class ChampionName():
+    def __init__(self, champion_name):
+        self.champ_name = self.convert_special_names(champion_name)
+
+    def convert_special_names(self, champion_name):
+        champ_name = champ_name_dict.get(champion_name)
+        if not champ_name:
+            return champion_name  # Not a special champ name
+        return champ_name
 
 
 class SummonerSpell():
@@ -231,3 +242,12 @@ def load_item_numbers():
     item_dict = {}
     for row in csv_file:
         item_dict.update({int(row[1]): row[0]})
+
+
+def load_special_champ_names():
+    file = open('app/special_champ_names.csv')
+    csv_file = csv.reader(file)
+    global champ_name_dict
+    champ_name_dict = {}
+    for row in csv_file:
+        champ_name_dict.update({row[0]: row[1]})
