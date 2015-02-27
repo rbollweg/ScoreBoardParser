@@ -2,29 +2,40 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Parse a match scoreboard</h1>
-<form action="" method="post" name="search">
-    {{ form.hidden_tag() }}
-    <p>
-    <h2>Match Data: </h2>
-    <label>Url to crawl: </label>{{ form.url_to_search(size=100) }} <br><br>
-    <label>Game Name (Game 1 by default): </label>{{ form.game_name(size=20) }}<br><br>
-    <label>Tournament Name: </label> {{ form.tournament_name(size=20) }} <br><br>
-    <label>Team Scores (0 to 1 in favor of the winner by default): </label>{{ form.blue_score(size=1) }} to
-    {{form.purple_score(size=1) }}<br><br>
-    <h2>Time Data: </h2>
-    <label>Start Time: </label> {{ form.start_time(size=3) }}<label> DST:</label> {{ form.daylight_savings_time }}
-    <label> Time Zone:</label> {{ form.time_zone }} <br><br>
-    <h2>External Link Data: </h2>
-    <label>LoL VoD: </label> {{ form.lol_vod(size=100) }} <br><br>
-    <label>Youtube VoD: </label> {{ form.youtube_vod(size=100) }} <br><br>
-    <label>Picks and Bans Page: </label> {{ form.picks_and_bans_page(size=100) }} <br><br>
-    </p>
+<div id="content" class="content">
+    <div id="form" class="form margin">
+        <form action="" method="post" name="search">
+            {{ form.hidden_tag() }}
+            <p>
 
-    <p><input type="submit" value="I'll do whatever I want with the button names"></p>
-</form>
+            <h2>Match Data: </h2>
+            <label>Url to crawl: </label>{{ form.url_to_search(size=95) }} <br><br>
+            <label>Game Name (Game 1 by default): </label>{{ form.game_name(size=20) }}<br><br>
+            <label>Tournament Name: </label> {{ form.tournament_name(size=20) }} <br><br>
+            <label>Team Scores (0 to 1 in favor of the winner by default): </label>{{ form.blue_score(size=1) }} to
+            {{form.purple_score(size=1) }}<br><br>
 
-<h1>Readme</h1>
+            <h2>Time Data: </h2>
+            <label>Start Time: </label> {{ form.start_time(size=3) }}<label> DST:</label> {{ form.daylight_savings_time
+            }}
+            <label> Time Zone:</label> {{ form.time_zone }} <br><br>
+
+            <h2>External Link Data: </h2>
+            <label>LoL VoD: </label> {{ form.lol_vod(size=95) }} <br><br>
+            <label>Youtube VoD: </label> {{ form.youtube_vod(size=95) }} <br><br>
+            <label>Picks and Bans Page: </label> {{ form.picks_and_bans_page(size=95) }} <br><br>
+            </p>
+
+            <p><input type="submit" value="I'll do whatever I want with the button names"></p>
+        </form>
+    </div>
+
+
+    <div id="readme" class="readme margin">
+        <h1>Readme</h1>
+<textarea rows="30" cols="65">
 {{ readme }}
-
-
+</textarea>
+    </div>
+</div>
 {% endblock %}
