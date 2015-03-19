@@ -180,13 +180,13 @@ class SummonerSpell():
             self.summoner_spell = "Revive"
         elif unconverted_text == "SummonerHaste":
             self.summoner_spell = "Ghost"
-        elif unconverted_text == "SummonerCleanse":
+        elif unconverted_text == "SummonerBoost":
             self.summoner_spell = "Cleanse"
-        elif unconverted_text == "SummonerGarrison":
+        elif unconverted_text == "SummonerOdinGarrison":
             self.summoner_spell = "Garrison"
         elif unconverted_text == "SummonerClairvoyance":
             self.summoner_spell = "Clairvoyance"
-        elif unconverted_text == "SummonerClarity":
+        elif unconverted_text == "SummonerMana":
             self.summoner_spell = "Clarity"
         else:
             self.summoner_spell = "Error Reading Summoner Spells"
