@@ -64,10 +64,12 @@ class ScoreBoard():
         red_bans = soupy_bans[1].find_all('div', class_='champion-icon')
         for ban in blue_bans:
             data = re.search("img/champion/(.*).png", str(ban.contents[0])).group(1)
-            self.blue_team.bans.append(data)
+            fixed_ban = ChampionName(data)
+            self.blue_team.bans.append(fixed_ban.champ_name)
         for ban in red_bans:
             data = re.search("img/champion/(.*).png", str(ban.contents[0])).group(1)
-            self.red_team.bans.append(data)
+            fixed_ban = ChampionName(data)
+            self.red_team.bans.append(fixed_ban.champ_name)
 
     def extract_conclusion(self, soup):
         soupy_conclusions = soup.find_all('div', class_='game-conclusion')
@@ -233,6 +235,7 @@ def spider(url, game_name, tournament_name, blue_score, purple_score, daylight_s
     except:
         driver.quit()
         return "Error Parsing URL, make sure all fields are filled correctly"
+
 
 
 def load_item_numbers():
