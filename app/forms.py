@@ -16,7 +16,7 @@ class SearchForm(Form):
     purple_score = StringField('purple_score')
     start_time = DateTimeField('start_time', validators=[DataRequired()], format='%H:%M')
     daylight_savings_time = SelectField('DST',
-                                        choices=[("no", 'No'), ("yes", 'Yes'), ("spring", 'Spring'), ("fall", 'Fall')])
+                                        choices=[("yes", 'Yes'), ("no", 'No'), ("spring", 'Spring'), ("fall", 'Fall')])
     time_zone = SelectField('DST', coerce=str, choices=[("PST", 'PST'), ("EST", 'EST'), ("CST", 'CST'), ("KST", 'KST')])
     lol_vod = StringField('lol_vod')
     youtube_vod = StringField('youtube_vod')
