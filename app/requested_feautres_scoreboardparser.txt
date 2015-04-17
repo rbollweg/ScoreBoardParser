@@ -1,0 +1,5 @@
+if ban is blank ban=none
+Click here to do another game saving time zone, Picks and Ban Page, and Tournament Name info
+champion name dictionary
+fix champ names with spaces or special chars
+async calls

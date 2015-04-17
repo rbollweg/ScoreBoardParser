@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Parse a Match Scoreboard:</h1>
 <div id="content" class="content">
-    <div id="form" class="form margin">
+    <div id="form" class="border_inline_block margin">
         <form action="" method="post" name="search">
             {{ form.hidden_tag() }}
             <p>
@@ -16,8 +16,7 @@
             {{form.purple_score(size=1) }}<br><br>
 
             <h2>Time Data: </h2>
-            <label>Start Time: </label> {{ form.start_time(size=3) }}<label> DST:</label> {{ form.daylight_savings_time
-            }}
+            <label>Start Time: </label> {{ form.start_time(size=3) }}<label> DST:</label> {{ form.daylight_savings_time}}
             <label> Time Zone:</label> {{ form.time_zone }} <br><br>
 
             <h2>External Link Data: </h2>
@@ -31,9 +30,9 @@
     </div>
 
 
-    <div id="readme" class="readme margin">
+    <div id="readme" class="border_inline_block margin">
         <h1>Readme:</h1>
-<textarea rows="30" cols="65">
+<textarea rows="30" cols="65" readonly>
 {{ readme }}
 </textarea>
     </div>

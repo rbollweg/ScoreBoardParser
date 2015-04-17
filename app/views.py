@@ -2,7 +2,7 @@ __author__ = 'The Gibs'
 
 from flask import render_template, flash, redirect
 from app import app, parser
-from .forms import SearchForm
+from .forms import SearchForm, AdminForm
 import datetime
 import urllib.request
 
@@ -37,6 +37,24 @@ def index():
                            form=form,
                            readme=readme)
 
+
+
+
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    form = AdminForm()
+    item_dict = parser.item_dict
+    special_champ_names = parser.champ_name_dict
+    form.item_numbers.data = item_dict
+    form.special_champ_names.data = special_champ_names
+    if form.validate_on_submit():
+        test = form.special_champ_names.raw_data
+        return render_template('admin.html',
+                           title='Admin',
+                           form = form)
+    return render_template('admin.html',
+                           title='Admin',
+                           form = form)
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():

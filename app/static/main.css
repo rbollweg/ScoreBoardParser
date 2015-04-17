@@ -11,14 +11,8 @@
     padding: 10px;
 }
 
-.readme
+.border_inline_block
 {
-    border-style: solid;
-    border-width: 1px;
-    display:inline-block;
-}
-
-.form {
     border-style: solid;
     border-width: 1px;
     display:inline-block;
